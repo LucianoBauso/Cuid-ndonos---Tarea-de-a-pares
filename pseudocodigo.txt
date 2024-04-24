@@ -1,0 +1,29 @@
+import java.util.List;
+
+class Viaje{
+
+    private List<Parada> paradas;
+    private float tiempoDemoraTotal;
+    public void calcularTiempoDeDemoraTotal() {
+        for (Parada parada : paradas) {
+            parada.calcularTiempoDeDemoraSeccion();
+            tiempoDemoraTotal += parada.getTiempoDemora();
+        }
+    }
+}
+
+class Parada{
+    private float tiempoDemora;
+    private String direccionInicial;
+    private String direccionFinal;
+	private float demora;
+    private static final float velocidadPromedio = 4.6;
+    public void calcularTiempoDeDemoraSeccion(){
+        DistanceMatrixAPI distanceMatrixAPI = new DistanceMatrixAPI();
+        float distancia = distanceMatrixAPI.calcularDistancia(this.direccionInicial, this.direccionFinal);
+        this.tiempoDemora = distancia / this.velocidadPromedio + demora;
+    }
+    public float getTiempoDemora() {
+        return tiempoDemora;
+    }
+}
